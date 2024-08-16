@@ -3,12 +3,19 @@ import { useState } from "react";
 import FormInputField from "../components/Form/FormInputField";
 import FormTitle from "../components/Form/FormTitle";
 import Button from "../components/UI/Button";
+import Header from "../components/UI/Header";
 
 // Login page
 function LoginPage() {
   // States
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  // Header navigation bar routes
+  const navBarRoutes = [
+    { name: "Login", link: "/" },
+    { name: "Sign up", link: "/sign-up" },
+  ];
 
   // Functions
   function handleSubmit(e) {
@@ -20,25 +27,29 @@ function LoginPage() {
 
   // View
   return (
-    <form>
-      <FormTitle title="Log in" />
+    <div>
+      <Header navBarRoutes={navBarRoutes} />
 
-      <FormInputField
-        label="Username:"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        type="text"
-      />
+      <form>
+        <FormTitle title="Log in" />
 
-      <FormInputField
-        label="Password:"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        type="password"
-      />
+        <FormInputField
+          label="Username:"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+        />
 
-      <Button text="Log in" onClick={handleSubmit} type="submit" />
-    </form>
+        <FormInputField
+          label="Password:"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+        />
+
+        <Button text="Log in" onClick={handleSubmit} type="submit" />
+      </form>
+    </div>
   );
 }
 

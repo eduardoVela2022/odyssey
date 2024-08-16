@@ -3,6 +3,7 @@ import { useState } from "react";
 import FormInputField from "../components/Form/FormInputField";
 import FormTitle from "../components/Form/FormTitle";
 import Button from "../components/UI/Button";
+import Header from "../components/UI/Header";
 
 // Sign up page
 function SignUpPage() {
@@ -10,6 +11,12 @@ function SignUpPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  // Header navigation bar routes
+  const navBarRoutes = [
+    { name: "Login", link: "/" },
+    { name: "Sign up", link: "/sign-up" },
+  ];
 
   // Functions
   function handleSubmit(e) {
@@ -22,32 +29,36 @@ function SignUpPage() {
 
   // View
   return (
-    <form>
-      <FormTitle title="Sign in" />
+    <div>
+      <Header navBarRoutes={navBarRoutes} />
 
-      <FormInputField
-        label="Username:"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        type="text"
-      />
+      <form>
+        <FormTitle title="Sign in" />
 
-      <FormInputField
-        label="Password:"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        type="password"
-      />
+        <FormInputField
+          label="Username:"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+        />
 
-      <FormInputField
-        label="Confirm password:"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        type="password"
-      />
+        <FormInputField
+          label="Password:"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+        />
 
-      <Button text="Sign in" onClick={handleSubmit} type="submit" />
-    </form>
+        <FormInputField
+          label="Confirm password:"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          type="password"
+        />
+
+        <Button text="Sign in" onClick={handleSubmit} type="submit" />
+      </form>
+    </div>
   );
 }
 
