@@ -9,7 +9,7 @@ const db = require("./config/connection");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-const server = new ApolloServer({
+const server = new ApolloServer({  // this is APOLLO Setup/config
   typeDefs,
   resolvers,
 });
@@ -20,7 +20,7 @@ const startApolloServer = async () => {
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
-
+  // here we are DEFINING the ONLY 'endpoint'  --> POST method to '/graphql'
   app.use(
     "/graphql",
     expressMiddleware(server, {

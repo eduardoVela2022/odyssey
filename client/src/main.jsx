@@ -7,6 +7,12 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 
+
+// we are going to construct the ENDPOINT to where we send our DATA
+const httpLink = createHttpLink({
+  uri: '/graphql'
+})
+
 // Create the router and its paths
 const router = createBrowserRouter([
   {
