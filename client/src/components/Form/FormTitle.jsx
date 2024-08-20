@@ -3,7 +3,7 @@
 // Form title component
 function FormTitle({ title }) {
   // View
-  return <h3>{title}</h3>;
+  return <h3 className="form-title">{title}</h3>;
 }
 
 // Export

@@ -2,8 +2,10 @@
 function Footer() {
   // View
   return (
-    <footer>
-      <h6>Made by: Dos Puntos Technology Inc.</h6>
+    <footer className="footer-container">
+      <h6 className="footer-title">
+        Copyright © 2024 Dos Puntos Technology Inc.
+      </h6>
     </footer>
   );
 }
