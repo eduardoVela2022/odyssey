@@ -32,7 +32,7 @@ function LoginPage() {
 
       <main className="main-container">
         <form className="form-container">
-          <FormTitle title="Log in" />
+          <FormTitle title="Login" />
 
           <FormInputField
             label="Username:"
@@ -48,7 +48,7 @@ function LoginPage() {
             type="password"
           />
 
-          <Button text="Log in" onClick={handleSubmit} type="submit" />
+          <Button text="Login" onClick={handleSubmit} type="submit" />
         </form>
       </main>
     </>
