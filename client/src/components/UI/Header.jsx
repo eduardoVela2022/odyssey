@@ -5,14 +5,18 @@ import { Link } from "react-router-dom";
 function Header({ navBarRoutes }) {
   // View
   return (
-    <header>
-      <h1>Odyssey</h1>
+    <header className="header-container">
+      <Link to={"/"} className="header-title">
+        Odyssey
+      </Link>
 
-      {navBarRoutes.map((route) => (
-        <Link key={route.link} to={route.link}>
-          {route.name}
-        </Link>
-      ))}
+      <nav className="navbar-container">
+        {navBarRoutes.map((route) => (
+          <Link className="navbar-item" key={route.link} to={route.link}>
+            {route.name}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }

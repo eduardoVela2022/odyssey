@@ -27,29 +27,31 @@ function LoginPage() {
 
   // View
   return (
-    <div>
+    <>
       <Header navBarRoutes={navBarRoutes} />
 
-      <form>
-        <FormTitle title="Log in" />
+      <main className="main-container">
+        <form className="form-container">
+          <FormTitle title="Log in" />
 
-        <FormInputField
-          label="Username:"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          type="text"
-        />
+          <FormInputField
+            label="Username:"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+          />
 
-        <FormInputField
-          label="Password:"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-        />
+          <FormInputField
+            label="Password:"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+          />
 
-        <Button text="Log in" onClick={handleSubmit} type="submit" />
-      </form>
-    </div>
+          <Button text="Log in" onClick={handleSubmit} type="submit" />
+        </form>
+      </main>
+    </>
   );
 }
 

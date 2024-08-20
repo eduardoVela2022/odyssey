@@ -4,7 +4,7 @@
 function Button({ text, onClick, type }) {
   // View
   return (
-    <button type={type} onClick={onClick}>
+    <button className="primary-btn" type={type} onClick={onClick}>
       {text}
     </button>
   );
