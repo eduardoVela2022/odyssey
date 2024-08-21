@@ -27,6 +27,11 @@
   background-color: var(--lime-400);
 }
 
+.page-title {
+  font-size: 4rem;
+  font-weight: 500;
+}
+
 /* Form Elements */
 .form-container {
   display: flex;
@@ -39,11 +44,6 @@
 
 .form-container button {
   margin-top: 2rem;
-}
-
-.form-title {
-  font-size: 4rem;
-  font-weight: 500;
 }
 
 .input-field-container {

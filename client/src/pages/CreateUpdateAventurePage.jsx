@@ -3,9 +3,9 @@
 // Imports
 import { useState } from "react";
 import FormInputField from "../components/Form/FormInputField";
-import FormTitle from "../components/Form/FormTitle";
 import Button from "../components/UI/Button";
 import Header from "../components/UI/Header";
+import PageTitle from "../components/UI/PageTitle";
 
 // Create and update adventure page
 function CreateUpdateAventurePage({ update = false }) {
@@ -36,7 +36,7 @@ function CreateUpdateAventurePage({ update = false }) {
 
       <main className="main-container">
         <form className="form-container">
-          <FormTitle title={update ? "Update Adventure" : "New Adventure"} />
+          <PageTitle title={update ? "Update Adventure" : "New Adventure"} />
 
           <FormInputField
             label="Destination:"

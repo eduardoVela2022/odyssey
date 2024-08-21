@@ -9,6 +9,8 @@ import SignUpPage from "./pages/SignUpPage.jsx";
 import "./reset.css";
 import CreateUpdateOdysseyPage from "./pages/CreateUpdateOdysseyPage.jsx";
 import CreateUpdateAventurePage from "./pages/CreateUpdateAventurePage.jsx";
+import AdventuresPage from "./pages/AdventuresPage.jsx";
+import SingleAdventurePage from "./pages/SingleAdventurePage.jsx";
 
 // we are going to construct the ENDPOINT to where we send our DATA
 // const httpLink = createHttpLink({
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
       { index: true, element: <LoginPage /> },
       // Sign up page
       { path: "/sign-up", element: <SignUpPage /> },
+      // Adventures page
+      { path: "adventures", element: <AdventuresPage /> },
+      // Single adventure page
+      { path: "adventure", element: <SingleAdventurePage /> },
       // Create adventure
       {
         path: "create-adventure",
