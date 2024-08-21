@@ -3,7 +3,7 @@
 // Completion bar component
 function CompletionBar({ completed, incompleted, total }) {
   return (
-    <div>
+    <div className="completion-bar-container">
       <p>{`Completed ${completed}/${total}`}</p>
       <p>{`Incompleted ${incompleted}/${total}`}</p>
     </div>

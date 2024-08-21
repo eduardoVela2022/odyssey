@@ -15,7 +15,7 @@ function AdventuresPage() {
       <Header navBarRoutes={navBarRoutes} />
 
       <main className="main-container">
-        <div>
+        <div className="page-title-and-btn-container">
           <PageTitle title="Choose an adventure!" />
 
           <Link className="primary-btn" to="/create-adventure">

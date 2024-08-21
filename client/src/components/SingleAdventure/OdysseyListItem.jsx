@@ -3,8 +3,8 @@
 // Odyssey list item component
 function OdysseyListItem({ title, description }) {
   return (
-    <li>
-      <h5>{title}</h5>
+    <li className="odyssey-list-item-container">
+      <h5 className="odyssey-list-item-title">{title}</h5>
       <p>{description}</p>
     </li>
   );
