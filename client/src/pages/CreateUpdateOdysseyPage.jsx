@@ -7,7 +7,7 @@ import FormTitle from "../components/Form/FormTitle";
 import Button from "../components/UI/Button";
 import Header from "../components/UI/Header";
 
-// Create odyssey page
+// Create and update odyssey page
 function CreateUpdateOdysseyPage({ update = false }) {
   // States
   const [title, setTitle] = useState("");
