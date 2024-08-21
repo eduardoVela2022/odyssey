@@ -6,12 +6,17 @@ function FormInputField({ label, value, onChange, type }) {
   return (
     <div className="input-field-container">
       <label className="input-field-label">{label}</label>
-      <input
-        className="input-field"
-        type={type}
-        value={value}
-        onChange={onChange}
-      />
+
+      {type === "textField" ? (
+        <textarea className="input-field textarea-field"></textarea>
+      ) : (
+        <input
+          className="input-field"
+          type={type}
+          value={value}
+          onChange={onChange}
+        />
+      )}
     </div>
   );
 }

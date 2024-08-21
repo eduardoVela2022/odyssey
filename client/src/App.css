@@ -69,6 +69,12 @@
   border-color: var(--lime-400);
 }
 
+.textarea-field {
+  resize: none;
+  white-space: pre-wrap;
+  height: 12rem;
+}
+
 /* Header Elements */
 .header-container {
   display: flex;
