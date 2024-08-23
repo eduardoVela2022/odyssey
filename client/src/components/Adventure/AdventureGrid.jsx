@@ -12,7 +12,8 @@ function AdventureGrid({ adventures }) {
           key={adventure.id}
           destination={adventure.destination}
           country={adventure.country}
-          dateOfAdventure={adventure.dateOfAdventure}
+          departureDate={adventure.departureDate}
+          returnDate={adventure.returnDate}
         />
       ))}
     </ul>

@@ -12,7 +12,8 @@ function CreateUpdateAventurePage({ update = false }) {
   // States
   const [destination, setDestination] = useState("");
   const [country, setCountry] = useState("");
-  const [dateOfAdventure, setDateOfAdventure] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
 
   // Header navigation bar routes
   const navBarRoutes = [
@@ -26,7 +27,8 @@ function CreateUpdateAventurePage({ update = false }) {
 
     console.log(destination);
     console.log(country);
-    console.log(dateOfAdventure);
+    console.log(departureDate);
+    console.log(returnDate);
   }
 
   // View
@@ -53,9 +55,16 @@ function CreateUpdateAventurePage({ update = false }) {
           />
 
           <FormInputField
-            label="Date of Adventure:"
-            value={dateOfAdventure}
-            onChange={(e) => setDateOfAdventure(e.target.value)}
+            label="Departure date:"
+            value={departureDate}
+            onChange={(e) => setDepartureDate(e.target.value)}
+            type="date"
+          />
+
+          <FormInputField
+            label="Return date:"
+            value={returnDate}
+            onChange={(e) => setReturnDate(e.target.value)}
             type="date"
           />
 
