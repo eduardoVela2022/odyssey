@@ -2,9 +2,12 @@
 :root {
   --website-background-color: #fafafa;
   --website-text-color: #0a0a0a;
+  --lime-600: #65a30d;
   --lime-500: #84cc16;
   --lime-400: #a3e635;
   --lime-300: #bef264;
+  --stone-400: #a8a29e;
+  --stone-300: #d6d3d1;
 }
 
 /* Margin and padding is removed for all elements, and border box dox sizing is applied to them */

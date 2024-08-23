@@ -5,6 +5,8 @@
   align-items: center;
   padding: 1rem;
   height: 100dvh;
+  overflow: auto;
+  scrollbar-width: none;
 }
 
 .primary-btn {
@@ -27,6 +29,88 @@
   background-color: var(--lime-400);
 }
 
+.page-title {
+  font-size: 4rem;
+  font-weight: 500;
+}
+
+.page-title-and-btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Adventures Elements */
+.adventures-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.adventures-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+  width: 85dvw;
+  margin-top: 1rem;
+}
+
+.adventures-grid-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 2px solid var(--lime-600);
+  border-radius: 15px;
+}
+
+.adventures-grid-item-title {
+  font-size: 1.125rem;
+}
+
+/* Single Adventure Elements */
+.single-adventure-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 60dvw;
+  margin: 1rem;
+}
+
+.completion-bar-container {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+}
+
+.odyssey-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: inherit;
+  margin-top: 1rem;
+}
+
+.odyssey-list-item-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border: 2px solid var(--lime-600);
+  border-radius: 15px;
+  width: inherit;
+}
+
+.odyssey-list-item-title {
+  font-size: 1.125rem;
+}
+
 /* Form Elements */
 .form-container {
   display: flex;
@@ -39,11 +123,6 @@
 
 .form-container button {
   margin-top: 2rem;
-}
-
-.form-title {
-  font-size: 4rem;
-  font-weight: 500;
 }
 
 .input-field-container {
@@ -67,6 +146,12 @@
 
 .input-field:focus {
   border-color: var(--lime-400);
+}
+
+.textarea-field {
+  resize: none;
+  white-space: pre-wrap;
+  height: 12rem;
 }
 
 /* Header Elements */

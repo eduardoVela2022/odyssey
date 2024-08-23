@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 // Imports
 import { useState } from "react";
 import FormInputField from "../components/Form/FormInputField";
@@ -5,11 +7,11 @@ import Button from "../components/UI/Button";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
 
-// Login page
-function LoginPage() {
+// Create and update odyssey page
+function CreateUpdateOdysseyPage({ update = false }) {
   // States
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   // Header navigation bar routes
   const navBarRoutes = [
@@ -21,8 +23,8 @@ function LoginPage() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(username);
-    console.log(password);
+    console.log(title);
+    console.log(description);
   }
 
   // View
@@ -32,23 +34,27 @@ function LoginPage() {
 
       <main className="main-container">
         <form className="form-container">
-          <PageTitle title="Login" />
+          <PageTitle title={update ? "Update Odyssey" : "New Odyssey"} />
 
           <FormInputField
-            label="Username:"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            label="Title:"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             type="text"
           />
 
           <FormInputField
-            label="Password:"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
+            label="Description:"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            type="textField"
           />
 
-          <Button text="Login" onClick={handleSubmit} type="submit" />
+          <Button
+            text={update ? "Update" : "Create"}
+            onClick={handleSubmit}
+            type="submit"
+          />
         </form>
       </main>
     </>
@@ -56,4 +62,4 @@ function LoginPage() {
 }
 
 // Export
-export default LoginPage;
+export default CreateUpdateOdysseyPage;
