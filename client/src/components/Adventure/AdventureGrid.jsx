@@ -4,13 +4,13 @@ import AdventureGridItem from "./AdventureGridItem";
 // Adventure grid component
 function AdventureGrid({ adventures }) {
   return (
-    <ul>
+    <ul className="adventures-grid-container">
       {adventures.map((adventure) => (
         <AdventureGridItem
           key={adventure.id}
           destination={adventure.destination}
           country={adventure.country}
-          dataOfAdventure={adventure.dataOfAdventure}
+          dateOfAdventure={adventure.dateOfAdventure}
         />
       ))}
     </ul>

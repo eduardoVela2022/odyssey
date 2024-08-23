@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 
 // Adventure grid item component
-function AdventureGridItem({ destination, country, dataOfAdventure }) {
+function AdventureGridItem({ destination, country, dateOfAdventure }) {
   return (
-    <li>
-      <h5>{destination}</h5>
+    <li className="adventures-grid-item-container">
+      <h5 className="adventures-grid-item-title">{destination}</h5>
       <p>{country}</p>
-      <p>{dataOfAdventure}</p>
+      <p>{dateOfAdventure.toDateString()}</p>
     </li>
   );
 }
