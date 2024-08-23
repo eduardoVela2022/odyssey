@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+
+// Imports
 import AdventureGridItem from "./AdventureGridItem";
 
 // Adventure grid component

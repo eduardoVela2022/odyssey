@@ -1,3 +1,4 @@
+// Imports
 import { Link } from "react-router-dom";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";

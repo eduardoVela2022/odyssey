@@ -41,6 +41,15 @@
   gap: 1rem;
 }
 
+.button-set-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon-btn:hover {
+  cursor: pointer;
+}
+
 /* Adventures Elements */
 .adventures-container {
   display: flex;
@@ -109,6 +118,11 @@
 
 .odyssey-list-item-title {
   font-size: 1.125rem;
+}
+
+.odyssey-list-item-title-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Form Elements */
