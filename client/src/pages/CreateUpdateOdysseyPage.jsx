@@ -14,10 +14,7 @@ function CreateUpdateOdysseyPage({ update = false }) {
   const [description, setDescription] = useState("");
 
   // Header navigation bar routes
-  const navBarRoutes = [
-    { name: "Login", link: "/" },
-    { name: "Sign up", link: "/sign-up" },
-  ];
+  const navBarRoutes = [{ name: "Go back", link: "/adventure" }];
 
   // Functions
   function handleSubmit(e) {

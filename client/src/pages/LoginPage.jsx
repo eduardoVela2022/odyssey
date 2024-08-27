@@ -4,12 +4,14 @@ import FormInputField from "../components/Form/FormInputField";
 import Button from "../components/UI/Button";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
+import { useNavigate } from "react-router-dom";
 
 // Login page
 function LoginPage() {
   // States
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   // Header navigation bar routes
   const navBarRoutes = [
@@ -23,6 +25,8 @@ function LoginPage() {
 
     console.log(username);
     console.log(password);
+
+    navigate("/adventures");
   }
 
   // View

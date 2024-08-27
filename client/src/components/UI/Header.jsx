@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+
+// Imports
 import { Link } from "react-router-dom";
 
 // Header component

@@ -1,3 +1,4 @@
+// Imports
 import { Link } from "react-router-dom";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
@@ -8,8 +9,8 @@ import OdysseyList from "../components/SingleAdventure/OdysseyList";
 function SingleAdventurePage() {
   // Header navigation bar routes
   const navBarRoutes = [
-    { name: "Login", link: "/" },
-    { name: "Sign up", link: "/sign-up" },
+    { name: "Home", link: "/adventures" },
+    { name: "Log out", link: "/" },
   ];
 
   // Test odyssey list
