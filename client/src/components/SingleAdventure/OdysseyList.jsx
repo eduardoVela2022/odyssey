@@ -8,11 +8,7 @@ function OdysseyList({ odysseys }) {
   return (
     <ul className="odyssey-list-container">
       {odysseys.map((odyssey) => (
-        <OdysseyListItem
-          key={odyssey.id}
-          title={odyssey.title}
-          description={odyssey.description}
-        />
+        <OdysseyListItem key={odyssey.id} odyssey={odyssey} />
       ))}
     </ul>
   );

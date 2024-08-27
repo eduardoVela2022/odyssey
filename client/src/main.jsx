@@ -12,11 +12,6 @@ import CreateUpdateAventurePage from "./pages/CreateUpdateAventurePage.jsx";
 import AdventuresPage from "./pages/AdventuresPage.jsx";
 import SingleAdventurePage from "./pages/SingleAdventurePage.jsx";
 
-// we are going to construct the ENDPOINT to where we send our DATA
-// const httpLink = createHttpLink({
-//   uri: "/graphql",
-// });
-
 // Create the router and its paths
 const router = createBrowserRouter([
   {

@@ -4,18 +4,13 @@
 import IconButton from "../UI/IconButton";
 
 // Adventure grid item component
-function AdventureGridItem({
-  destination,
-  country,
-  departureDate,
-  returnDate,
-}) {
+function AdventureGridItem({ adventure }) {
   return (
     <li className="adventures-grid-item-container">
-      <h5 className="adventures-grid-item-title">{destination}</h5>
-      <p>{country}</p>
-      <p>Depart: {departureDate.toDateString()}</p>
-      <p>Return: {returnDate.toDateString()}</p>
+      <h5 className="adventures-grid-item-title">{adventure.destination}</h5>
+      <p>{adventure.country}</p>
+      <p>Depart: {adventure.departureDate.toDateString()}</p>
+      <p>Return: {adventure.returnDate.toDateString()}</p>
 
       <div className="button-set-container">
         <IconButton icon={"/update-icon.svg"} alt={"Update button icon"} />
