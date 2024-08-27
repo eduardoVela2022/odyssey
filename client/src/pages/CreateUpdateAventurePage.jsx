@@ -16,10 +16,7 @@ function CreateUpdateAventurePage({ update = false }) {
   const [returnDate, setReturnDate] = useState("");
 
   // Header navigation bar routes
-  const navBarRoutes = [
-    { name: "Login", link: "/" },
-    { name: "Sign up", link: "/sign-up" },
-  ];
+  const navBarRoutes = [{ name: "Go back", link: "/adventures" }];
 
   // Functions
   function handleSubmit(e) {
