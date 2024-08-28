@@ -2,7 +2,6 @@ const typeDefs = `
   type User {
     _id: ID
     username: String
-    email: String
     adventures: [Adventure]!
   }
 
@@ -33,7 +32,7 @@ const typeDefs = `
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(username: String!, password: String!): Auth
 
     addAdventure(
       destination: String!
@@ -49,6 +48,8 @@ const typeDefs = `
       startDate: String
       endDate: String
     ): Adventure
+
+    deleteAdventure(_id: ID!): Adventure
 
     addOdyssey(
       adventureID: ID!
@@ -67,9 +68,7 @@ const typeDefs = `
 
     deleteOdyssey(adventureID: ID!, odysseyID: ID!): Adventure
 
-    deleteAdventure(_id: ID!): Adventure
-
-    login(email: String!, password: String!): Auth
+    login(username: String!, password: String!): Auth
   }
 `;
 
