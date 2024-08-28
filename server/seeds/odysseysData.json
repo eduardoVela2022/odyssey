@@ -1,0 +1,33 @@
+[
+    {
+        "title": "Trek #1",  
+        "description": "biking",
+        "completed": false
+    },
+    {
+        "title": "Trek #2",  
+        "description": "mountain hike",
+        "completed": false
+    },
+    {
+        "title": "Trek #3",  
+        "description": "early workout",
+        "completed": false
+    },
+    {
+        "title": "Trek #4",  
+        "description": "taco tour",
+        "completed": false
+    },
+    {
+        "title": "Trek #5",  
+        "description": "breakfast",
+        "completed": false
+    },
+    {
+        "title": "Trek #6",  
+        "description": "shopping",
+        "completed": false
+    }
+    
+]
