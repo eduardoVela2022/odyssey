@@ -43,12 +43,13 @@ const resolvers = {
       if (!user) {
         throw new AuthenticationError("You need to be logged in!");
       }
-
+      const parseStartDate = Date.parse(startDate);
+      const parseEndDate = Date.parse(endDate);
       const adventure = await Adventure.create({
         destination,
         country,
-        startDate,
-        endDate,
+        startDate: parseStartDate,
+        endDate: parseEndDate,
         userId: user._id,
       });
 
@@ -67,10 +68,16 @@ const resolvers = {
       if (!user) {
         throw new AuthenticationError("You need to be logged in!");
       }
-
+      const parseStartDate = Date.parse(startDate);
+      const parseEndDate = Date.parse(endDate);
       const adventure = await Adventure.findOneAndUpdate(
         { _id, userId: user._id },
-        { destination, country, startDate, endDate },
+        {
+          destination,
+          country,
+          startDate: parseStartDate,
+          endDate: parseEndDate,
+        },
         { new: true }
       );
 
