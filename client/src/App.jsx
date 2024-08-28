@@ -39,11 +39,11 @@ function App() {
   // View
   return (
     <ApolloProvider client={client}>
-    <>
-      <Outlet />
+      <>
+        <Outlet />
 
-      <Footer />
-    </>
+        <Footer />
+      </>
     </ApolloProvider>
   );
 }

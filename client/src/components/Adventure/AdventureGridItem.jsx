@@ -9,8 +9,8 @@ function AdventureGridItem({ adventure }) {
     <li className="adventures-grid-item-container">
       <h5 className="adventures-grid-item-title">{adventure.destination}</h5>
       <p>{adventure.country}</p>
-      <p>Depart: {adventure.departureDate.toDateString()}</p>
-      <p>Return: {adventure.returnDate.toDateString()}</p>
+      <p>Depart: {adventure.departureDate}</p>
+      <p>Return: {adventure.returnDate}</p>
 
       <div className="button-set-container">
         <IconButton icon={"/update-icon.svg"} alt={"Update button icon"} />

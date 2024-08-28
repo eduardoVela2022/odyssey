@@ -1,7 +1,9 @@
+// Imports
 const { User, Adventure } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
+  // Queries
   Query: {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate("adventures");
@@ -11,72 +13,69 @@ const resolvers = {
     },
   },
 
+  // Mutations
   Mutation: {
+    // Add user
     addUser: async (parent, { username, password }) => {
+      // User is created
       const user = await User.create({ username, password });
+      // Log in token is created
       const token = signToken(user);
+      // Returns log in token and the created user
       return { token, user };
     },
 
-    login: async (parent, { username, password }) => {
-      const user = await User.findOne({ username });
-
-      if (!user) {
-        throw new AuthenticationError("Incorrect credentials.");
-      }
-
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw new AuthenticationError("Incorrect credentials.");
-      }
-
-      const token = signToken(user);
-      return { token, user };
-    },
-
+    // Add adventure
     addAdventure: async (
       parent,
-      { destination, country, startDate, endDate },
-      { user }
+      { destination, country, departureDate, returnDate },
+      context
     ) => {
-      if (!user) {
-        throw new AuthenticationError("You need to be logged in!");
+      // Checks if user is logged in
+      if (context.user) {
+        // Transforms date objects into strings
+        const parseDepartureDate = Date.parse(departureDate);
+        const parseReturnDate = Date.parse(returnDate);
+
+        // Adventure is created
+        const adventure = await Adventure.create({
+          destination,
+          country,
+          departureDate: parseDepartureDate,
+          returnDate: parseReturnDate,
+        });
+
+        // Updates the user's adventure list
+        await User.findByIdAndUpdate(context.user._id, {
+          $addToSet: { adventures: adventure._id },
+        });
+
+        // Returns the created adventure
+        return adventure;
       }
-      const parseStartDate = Date.parse(startDate);
-      const parseEndDate = Date.parse(endDate);
-      const adventure = await Adventure.create({
-        destination,
-        country,
-        startDate: parseStartDate,
-        endDate: parseEndDate,
-        userId: user._id,
-      });
 
-      await User.findByIdAndUpdate(user._id, {
-        $push: { adventures: adventure._id },
-      });
-
-      return adventure;
+      // If user isn't logged in, throw authentication error
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     updateAdventure: async (
       parent,
-      { _id, destination, country, startDate, endDate },
+      { _id, destination, country, departureDate, returnDate },
       { user }
     ) => {
       if (!user) {
         throw new AuthenticationError("You need to be logged in!");
       }
-      const parseStartDate = Date.parse(startDate);
-      const parseEndDate = Date.parse(endDate);
+      const parseDepartureDate = Date.parse(departureDate);
+      const parseReturnDate = Date.parse(returnDate);
+
       const adventure = await Adventure.findOneAndUpdate(
         { _id, userId: user._id },
         {
           destination,
           country,
-          startDate: parseStartDate,
-          endDate: parseEndDate,
+          departureDate: parseDepartureDate,
+          returnDate: parseReturnDate,
         },
         { new: true }
       );
@@ -170,7 +169,33 @@ const resolvers = {
 
       return adventure;
     },
+
+    // Logs in a user
+    login: async (parent, { username, password }) => {
+      // Finds the user with the given username
+      const user = await User.findOne({ username });
+
+      // If the user doesn't exists, throw authentication error
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials.");
+      }
+
+      // Checks if the password is correct
+      const correctPassword = await user.isCorrectPassword(password);
+
+      // If the password is not correct, throw authentication error
+      if (!correctPassword) {
+        throw new AuthenticationError("Incorrect credentials.");
+      }
+
+      // Log in token is created
+      const token = signToken(user);
+
+      // Returns log in token and user
+      return { token, user };
+    },
   },
 };
 
+// Exports
 module.exports = resolvers;

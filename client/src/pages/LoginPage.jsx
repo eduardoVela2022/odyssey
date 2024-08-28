@@ -7,7 +7,7 @@ import PageTitle from "../components/UI/PageTitle";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_USER } from "../utils/mutation";
 import { useMutation } from "@apollo/client";
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 // Login page
 function LoginPage() {
@@ -18,8 +18,8 @@ function LoginPage() {
   // Navigation
   const navigate = useNavigate();
 
-    // Mutation to login a user
-    const [login, {error, data}] = useMutation(LOGIN_USER);
+  // Mutation to login a user
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
   // Header navigation bar routes
   const navBarRoutes = [
@@ -34,17 +34,16 @@ function LoginPage() {
 
     try {
       // Tries to login the user with the given username and password
-      const {data} = await login({ variables: {username, password}});
+      const { data } = await login({ variables: { username, password } });
 
       // If the user exists create login token and use it
       Auth.login(data.login.token);
 
       // Go to the user's adventures page
-      navigate("/adventures");
-      alert("You were logged in successfully!")
-    }
-    // If an error occurs, log it to the console
-    catch (error) {
+      navigate(`/adventures${username}`);
+      alert("You were logged in successfully!");
+    } catch (error) {
+      // If an error occurs, log it to the console
       console.log(error);
     }
   }

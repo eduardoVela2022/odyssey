@@ -6,6 +6,9 @@ import FormInputField from "../components/Form/FormInputField";
 import Button from "../components/UI/Button";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
+import { useMutation } from "@apollo/client";
+import { ADD_ADVENTURE } from "../utils/mutation";
+import { useNavigate } from "react-router-dom";
 
 // Create and update adventure page
 function CreateUpdateAventurePage({ update = false }) {
@@ -15,17 +18,38 @@ function CreateUpdateAventurePage({ update = false }) {
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
 
+  // Navigation
+  const navigate = useNavigate();
+
   // Header navigation bar routes
   const navBarRoutes = [{ name: "Go back", link: "/adventures" }];
 
+  // Mutation to add an adventure
+  const [addAdventure, { error }] = useMutation(ADD_ADVENTURE);
+
   // Functions
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
+    // Prevents the page from reloading
     e.preventDefault();
 
-    console.log(destination);
-    console.log(country);
-    console.log(departureDate);
-    console.log(returnDate);
+    try {
+      // Adds the adventure with the given data
+      await addAdventure({
+        variables: {
+          destination,
+          country,
+          departureDate,
+          returnDate,
+        },
+      });
+
+      // Go to the user's adventures page
+      navigate("/adventures");
+      alert("Adventure was created successfully!");
+    } catch (error) {
+      // If an error occurs, log it to the console
+      console.log(error);
+    }
   }
 
   // View

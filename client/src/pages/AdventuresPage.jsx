@@ -1,8 +1,10 @@
 // Imports
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
 import AdventureGrid from "../components/Adventure/AdventureGrid";
+import { useQuery } from "@apollo/client";
+import { QUERY_USER_ADVENTURES } from "../utils/queries";
 
 // Adventures page
 function AdventuresPage() {
@@ -12,51 +14,16 @@ function AdventuresPage() {
     { name: "Log out", link: "/" },
   ];
 
-  // Test adventures list
-  const testAdventures = [
-    {
-      id: 1,
-      destination: "Monterrey",
-      country: "Mexico",
-      departureDate: new Date(),
-      returnDate: new Date(),
-    },
-    {
-      id: 2,
-      destination: "Cancun",
-      country: "Mexico",
-      departureDate: new Date(),
-      returnDate: new Date(),
-    },
-    {
-      id: 3,
-      destination: "Merida",
-      country: "Mexico",
-      departureDate: new Date(),
-      returnDate: new Date(),
-    },
-    {
-      id: 4,
-      destination: "Tijuana",
-      country: "Mexico",
-      departureDate: new Date(),
-      returnDate: new Date(),
-    },
-    {
-      id: 5,
-      destination: "Chihuahua",
-      country: "Mexico",
-      departureDate: new Date(),
-      returnDate: new Date(),
-    },
-    {
-      id: 6,
-      destination: "Guadalajara",
-      country: "Mexico",
-      departureDate: new Date(),
-      returnDate: new Date(),
-    },
-  ];
+  // Obtains the username that was passed in the URL as a parameter
+  const { username: userParam } = useParams();
+
+  console.log(userParam);
+
+  const { loading, data } = useQuery(QUERY_USER_ADVENTURES, {
+    variables: { username: userParam },
+  });
+
+  console.log(data);
 
   return (
     <>
@@ -72,7 +39,13 @@ function AdventuresPage() {
             </Link>
           </div>
 
-          <AdventureGrid adventures={testAdventures} />
+          {!data ? (
+            <p className="empty-list-message">
+              You currently have no adventures. Create one! 🏝️
+            </p>
+          ) : (
+            <AdventureGrid adventures={data.user.adventures} />
+          )}
         </div>
       </main>
     </>

@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       // Sign up page
       { path: "/sign-up", element: <SignUpPage /> },
       // Adventures page
-      { path: "adventures", element: <AdventuresPage /> },
+      { path: "adventures/:username", element: <AdventuresPage /> },
       // Single adventure page
       { path: "adventure", element: <SingleAdventurePage /> },
       // Create adventure

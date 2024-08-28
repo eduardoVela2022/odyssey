@@ -8,7 +8,7 @@ function AdventureGrid({ adventures }) {
   return (
     <ul className="adventures-grid-container">
       {adventures.map((adventure) => (
-        <AdventureGridItem key={adventure.id} adventure={adventure} />
+        <AdventureGridItem key={adventure._id} adventure={adventure} />
       ))}
     </ul>
   );

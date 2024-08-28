@@ -50,6 +50,11 @@
   cursor: pointer;
 }
 
+.empty-list-message {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
 /* Adventures Elements */
 .adventures-container {
   display: flex;

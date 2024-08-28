@@ -1,45 +1,36 @@
 // Imports
 import { gql } from "@apollo/client";
 
-// Get a user with its adventures
-export const QUERY_USER = gql`
- query user($username: String!) {
+// Get a user and his or her adventures
+export const QUERY_USER_ADVENTURES = gql`
+  query user($username: String!) {
     user(username: $username) {
+      adventures {
         _id
-        username
-        email
-        adventures {
-            _id
-            destination
-            country
-            startDate
-            endDate
-            odysseys {
-                _id
-                title
-                description
-                completed
-            }
-        }
+        destination
+        country
+        departureDate
+        returnDate
+      }
     }
- }
+  }
 `;
 
 // Get a single user adventure
 export const QUERY_ADVENTURE = gql`
-query adventure($_id: ID!) {
+  query adventure($_id: ID!) {
     adventure(_id: $_id) {
+      _id
+      destination
+      country
+      startDate
+      endDate
+      odysseys {
         _id
-        destination
-        country
-        startDate
-        endDate
-        odysseys {
-            _id
-            title
-            description
-            completed
-        }
+        title
+        description
+        completed
+      }
     }
-}
+  }
 `;

@@ -9,8 +9,8 @@ const typeDefs = `
     _id: ID
     destination: String
     country: String
-    startDate: String
-    endDate: String
+    departureDate: String
+    returnDate: String
     odysseys: [Odyssey]!
   }
 
@@ -37,16 +37,16 @@ const typeDefs = `
     addAdventure(
       destination: String!
       country: String!
-      startDate: String!
-      endDate: String!
+      departureDate: String!
+      returnDate: String!
     ): Adventure
 
     updateAdventure(
       _id: ID!
       destination: String
       country: String
-      startDate: String
-      endDate: String
+      departureDate: String
+      returnDate: String
     ): Adventure
 
     deleteAdventure(_id: ID!): Adventure
