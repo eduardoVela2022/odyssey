@@ -4,7 +4,7 @@
 import AdventureGridItem from "./AdventureGridItem";
 
 // Adventure grid component
-function AdventureGrid({ adventures, refetch }) {
+function AdventureGrid({ adventures, refetch, username }) {
   // View
   return (
     <ul className="adventures-grid-container">
@@ -13,6 +13,7 @@ function AdventureGrid({ adventures, refetch }) {
           key={adventure._id}
           adventure={adventure}
           refetch={refetch}
+          username={username}
         />
       ))}
     </ul>

@@ -30,6 +30,15 @@ function CreateAventurePage() {
   // Mutation to add an adventure
   const [addAdventure, { error }] = useMutation(ADD_ADVENTURE);
 
+  // Checks if fields are filled
+  function fieldsAreFilled() {
+    if (!destination || !country || !departureDate || !returnDate) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // Functions
   async function handleSubmit(e) {
     // Prevents the page from reloading
@@ -91,7 +100,12 @@ function CreateAventurePage() {
             type="date"
           />
 
-          <Button text={"Create"} onClick={handleSubmit} type="submit" />
+          <Button
+            text={"Create"}
+            onClick={handleSubmit}
+            type="submit"
+            disabled={fieldsAreFilled()}
+          />
         </form>
       </main>
     </>

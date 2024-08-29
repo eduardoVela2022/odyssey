@@ -27,6 +27,15 @@ function LoginPage() {
     { name: "Sign up", link: "/sign-up" },
   ];
 
+  // Checks if fields are filled
+  function fieldsAreFilled() {
+    if (!username || !password) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // Handles the form's submit event
   async function handleSubmit(e) {
     // Prevents the page from reloading
@@ -70,7 +79,12 @@ function LoginPage() {
             type="password"
           />
 
-          <Button text="Login" onClick={handleSubmit} type="submit" />
+          <Button
+            text="Login"
+            onClick={handleSubmit}
+            type="submit"
+            disabled={fieldsAreFilled()}
+          />
         </form>
       </main>
     </>

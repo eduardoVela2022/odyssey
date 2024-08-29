@@ -11,7 +11,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_ODYSSEY } from "../utils/mutation";
 
 // Create and update odyssey page
-function CreateUpdateOdysseyPage() {
+function CreateOdysseyPage() {
   // States
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -29,6 +29,15 @@ function CreateUpdateOdysseyPage() {
 
   // Mutation to add an adventure
   const [addOdyssey, { error }] = useMutation(ADD_ODYSSEY);
+
+  // Checks if fields are filled
+  function fieldsAreFilled() {
+    if (!title || !description) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   // Functions
   async function handleSubmit(e) {
@@ -76,7 +85,12 @@ function CreateUpdateOdysseyPage() {
             type="textField"
           />
 
-          <Button text={"Create"} onClick={handleSubmit} type="submit" />
+          <Button
+            text={"Create"}
+            onClick={handleSubmit}
+            type="submit"
+            disabled={fieldsAreFilled()}
+          />
         </form>
       </main>
     </>
@@ -84,4 +98,4 @@ function CreateUpdateOdysseyPage() {
 }
 
 // Export
-export default CreateUpdateOdysseyPage;
+export default CreateOdysseyPage;

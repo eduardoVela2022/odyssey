@@ -19,6 +19,7 @@
   transition: background-color 0.5s ease;
   outline-color: var(--lime-500);
   outline-offset: 2px;
+  cursor: pointer;
 }
 
 .primary-btn:hover {
@@ -27,6 +28,19 @@
 
 .primary-btn:focus {
   background-color: var(--lime-400);
+}
+
+.disabled-btn {
+  font-size: 1.25rem;
+  font-weight: 900;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  width: fit-content;
+  background-color: var(--stone-400);
+  transition: background-color 0.5s ease;
+  outline-color: var(--stone-400);
+  outline-offset: 2px;
+  cursor: not-allowed;
 }
 
 .page-title {
@@ -51,7 +65,7 @@
 }
 
 .empty-list-message {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   margin-top: 2rem;
 }
 
@@ -80,6 +94,12 @@
   padding: 1rem;
   border: 2px solid var(--lime-600);
   border-radius: 15px;
+  transition: border-color 0.5s ease;
+  cursor: pointer;
+}
+
+.adventures-grid-item-container:hover {
+  border-color: var(--lime-400);
 }
 
 .adventures-grid-item-title {
@@ -119,6 +139,11 @@
   border: 2px solid var(--lime-600);
   border-radius: 15px;
   width: inherit;
+  transition: border-color 0.5s ease;
+}
+
+.odyssey-list-item-container:hover {
+  border-color: var(--lime-400);
 }
 
 .odyssey-list-item-title {

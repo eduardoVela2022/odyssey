@@ -51,6 +51,20 @@ function SignUpPage() {
     }
   }
 
+  // Checks if fields are filled
+  function validateFields() {
+    if (
+      !username ||
+      !password ||
+      !confirmPassword ||
+      password !== confirmPassword
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // View
   return (
     <div>
@@ -81,7 +95,12 @@ function SignUpPage() {
             type="password"
           />
 
-          <Button text="Sign in" onClick={handleSubmit} type="submit" />
+          <Button
+            text="Sign in"
+            onClick={handleSubmit}
+            type="submit"
+            disabled={validateFields()}
+          />
         </form>
       </main>
     </div>

@@ -7,7 +7,7 @@ import { DELETE_ADVENTURE } from "../../utils/mutation";
 import { useNavigate } from "react-router-dom";
 
 // Adventure grid item component
-function AdventureGridItem({ adventure, refetch }) {
+function AdventureGridItem({ adventure, refetch, username }) {
   // Navigation
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ function AdventureGridItem({ adventure, refetch }) {
     e.stopPropagation();
 
     // Goes to single adventure page
-    navigate(`/adventure/${adventure._id}`);
+    navigate(`/adventure/${adventure._id}/${username}`);
   }
 
   // Deletes the adventure from the user's adventure list

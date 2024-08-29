@@ -19,7 +19,7 @@ function AdventuresPage() {
   ];
 
   // Gets the adventures of the user from the database
-  const { loading, data, refetch } = useQuery(QUERY_USER_ADVENTURES, {
+  const { data, refetch } = useQuery(QUERY_USER_ADVENTURES, {
     variables: { username: userParam },
   });
 
@@ -34,23 +34,32 @@ function AdventuresPage() {
 
       <main className="main-container">
         <div className="adventures-container">
-          <div className="page-title-and-btn-container">
-            <PageTitle title="Choose an adventure!" />
+          {data !== undefined ? (
+            <>
+              <div className="page-title-and-btn-container">
+                <PageTitle title="Choose an adventure!" />
 
-            <Link className="primary-btn" to={`/create-adventure/${userParam}`}>
-              Add an adventure
-            </Link>
-          </div>
-
-          {!data ? (
-            <p className="empty-list-message">
-              You currently have no adventures. Create one! 🏝️
-            </p>
+                <Link
+                  className="primary-btn"
+                  to={`/create-adventure/${userParam}`}
+                >
+                  Add an adventure
+                </Link>
+              </div>
+              {data.user.adventures.length > 0 ? (
+                <AdventureGrid
+                  adventures={data.user.adventures}
+                  refetch={refetch}
+                  username={userParam}
+                />
+              ) : (
+                <p className="empty-list-message">
+                  You currently have no adventures. Create one! 🌎
+                </p>
+              )}
+            </>
           ) : (
-            <AdventureGrid
-              adventures={data.user.adventures}
-              refetch={refetch}
-            />
+            <p className="page-title">Loading...</p>
           )}
         </div>
       </main>
