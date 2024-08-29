@@ -4,7 +4,6 @@ const connection = require('../config/connection');
 const { User, Adventure } = require('../models');
 const usersData = require("./usersData");
 const adventuresData = require('./adventuresData');
-const odysseysData = require('./odysseysData');
 // figure out the ODER we need to ADD the data --> Associations
 
 // Error Checking 
@@ -21,73 +20,21 @@ connection.once('open', async () => {
     if(adventuresCheck.length) {
         await connection.dropCollection('adventures');
     }
-   /*
-    let odysseyCheck = await connection.db.listCollections({ name: 'odysseys'}).toArray();
-    if(odysseyCheck.length) {
-        await connection.dropCollection('odysseys');
-    } */
+const users = await User.create(usersData)
     
-    // Create The Users
-    const newUsers = await User.create({
-        username: "Tom",
-        email: "tom@gmail.com",
-        password: "pass1234"
-    },{
-        username: "Sarah",
-        email: "sarah@gmail.com",
-        password: "pass1234"
-    }, );
-    console.log("Users: ", newUsers);
-    // Create the Adventures
-    const newAdventures = await Adventure.create({
-        destination: "Montreal",
-        country: "Canada",
-        startDate: "2024-09-09",
-        endDate: "2024-09-15",
-        odysseys: [
+    for (let i=0; i<adventuresData.length; i++) {
+        const {_id}=await Adventure.create(adventuresData[i])
+        let user = await User.findOneAndUpdate(
+            {_id:users[i]._id},
             {
-                title: "Trek #1",  
-                description: "biking",
-                completed: false
-            },
-            {
-                title: "Trek #2",  
-                description: "Mountain hike",
-                completed: false
+                $addToSet: {
+                    adventures: _id
+                }
             }
-        ]
-    },
-    {
-        destination: "Detroit",
-        country: "United States",
-        startDate: "2024-05-09",
-        endDate: "2024-05-15",
-        odysseys: []
-    },
-    {
-        destination: "Mexico City",
-        country: "Mexico",
-        startDate: "2024-08-09",
-        endDate: "2024-08-15",
-        odysseys: [
-            {
-                title: "Trek #3",  
-                description: "ocean swimming",
-                completed: false
-            },
-            {
-                title: "Trek #4",  
-                description: "wine tour",
-                completed: false
-            }
-        ]
-    },)
-    console.log("Adventures: ", newAdventures);
 
-        // --> Add the Aventure_ID to the Associated User
-
-    // Create the Odysseys
-        // --> Add the Odysseys to the Associated Adventure
+        )
+    }
+  
 
     console.log("Seeding complete")
     process.exit(0)
