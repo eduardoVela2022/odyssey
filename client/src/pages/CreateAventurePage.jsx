@@ -8,21 +8,24 @@ import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
 import { useMutation } from "@apollo/client";
 import { ADD_ADVENTURE } from "../utils/mutation";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Create and update adventure page
-function CreateUpdateAventurePage({ update = false }) {
+function CreateAventurePage() {
   // States
   const [destination, setDestination] = useState("");
   const [country, setCountry] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
 
+  // Obtains the username that was passed in the URL as a parameter
+  const { username: userParam } = useParams();
+
   // Navigation
   const navigate = useNavigate();
 
   // Header navigation bar routes
-  const navBarRoutes = [{ name: "Go back", link: "/adventures" }];
+  const navBarRoutes = [{ name: "Go back", link: `/adventures/${userParam}` }];
 
   // Mutation to add an adventure
   const [addAdventure, { error }] = useMutation(ADD_ADVENTURE);
@@ -44,8 +47,7 @@ function CreateUpdateAventurePage({ update = false }) {
       });
 
       // Go to the user's adventures page
-      navigate("/adventures");
-      alert("Adventure was created successfully!");
+      navigate(`/adventures/${userParam}`);
     } catch (error) {
       // If an error occurs, log it to the console
       console.log(error);
@@ -59,7 +61,7 @@ function CreateUpdateAventurePage({ update = false }) {
 
       <main className="main-container">
         <form className="form-container">
-          <PageTitle title={update ? "Update Adventure" : "New Adventure"} />
+          <PageTitle title={"New Adventure"} />
 
           <FormInputField
             label="Destination:"
@@ -89,11 +91,7 @@ function CreateUpdateAventurePage({ update = false }) {
             type="date"
           />
 
-          <Button
-            text={update ? "Update" : "Create"}
-            onClick={handleSubmit}
-            type="submit"
-          />
+          <Button text={"Create"} onClick={handleSubmit} type="submit" />
         </form>
       </main>
     </>
@@ -101,4 +99,4 @@ function CreateUpdateAventurePage({ update = false }) {
 }
 
 // Export
-export default CreateUpdateAventurePage;
+export default CreateAventurePage;

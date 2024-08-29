@@ -58,52 +58,66 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+    // Update adventure
     updateAdventure: async (
       parent,
       { _id, destination, country, departureDate, returnDate },
-      { user }
+      context
     ) => {
-      if (!user) {
-        throw new AuthenticationError("You need to be logged in!");
+      // Checks if user is logged in
+      if (context.user) {
+        // Transforms date objects into strings
+        const parseDepartureDate = Date.parse(departureDate);
+        const parseReturnDate = Date.parse(returnDate);
+
+        // Adventure is updated
+        const adventure = await Adventure.findByIdAndUpdate(
+          _id,
+          {
+            destination,
+            country,
+            departureDate: parseDepartureDate,
+            returnDate: parseReturnDate,
+          },
+          { new: true }
+        );
+
+        // If adventure doesn't exist, throw authentication error
+        if (!adventure) {
+          throw new AuthenticationError("No adventure found with this ID");
+        }
+
+        // Return the updated adventure
+        return adventure;
       }
-      const parseDepartureDate = Date.parse(departureDate);
-      const parseReturnDate = Date.parse(returnDate);
 
-      const adventure = await Adventure.findOneAndUpdate(
-        { _id, userId: user._id },
-        {
-          destination,
-          country,
-          departureDate: parseDepartureDate,
-          returnDate: parseReturnDate,
-        },
-        { new: true }
-      );
-
-      if (!adventure) {
-        throw new AuthenticationError("No adventure found with this ID");
-      }
-
-      return adventure;
+      // If user isn't logged in, throw authentication error
+      throw new AuthenticationError("You need to be logged in!");
     },
 
-    deleteAdventure: async (parent, { _id }, { user }) => {
-      if (!user) {
-        throw new AuthenticationError("You need to be logged in!");
+    // Delete adventure
+    deleteAdventure: async (parent, { _id }, context) => {
+      // Checks if user is logged in
+      if (context.user) {
+        // Deletes the adventure that has the given id
+        const adventure = await Adventure.findOneAndDelete(_id);
+
+        // If adventure doesn't exist, throw authentication error
+        if (!adventure) {
+          throw new AuthenticationError("No adventure found with this ID");
+        }
+
+        // Removes the deleted adventure from the adventures list of its user
+        await User.findByIdAndUpdate(context.user._id, {
+          $pull: { adventures: _id },
+        });
+
+        // Return the deleted adventure
+        return adventure;
       }
 
-      const adventure = await Adventure.findOneAndDelete({
-        _id,
-        userId: user._id,
-      });
-
-      if (!adventure) {
-        throw new AuthenticationError("No adventure found with this ID");
-      }
-
-      await User.findByIdAndUpdate(user._id, { $pull: { adventures: _id } });
-
-      return adventure;
+      // If user isn't logged in, throw authentication error
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     addOdyssey: async (

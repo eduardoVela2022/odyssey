@@ -8,9 +8,7 @@ function Header({ navBarRoutes }) {
   // View
   return (
     <header className="header-container">
-      <Link to={"/"} className="header-title">
-        Odyssey
-      </Link>
+      <h1 className="header-title">Odyssey</h1>
 
       <nav className="navbar-container">
         {navBarRoutes.map((route) => (

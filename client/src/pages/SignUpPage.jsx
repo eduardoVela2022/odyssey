@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutation";
 import Auth from "../utils/auth";
+import { QUERY_USER_ADVENTURES } from "../utils/queries";
 
 // Sign up page
 function SignUpPage() {
@@ -43,8 +44,7 @@ function SignUpPage() {
       Auth.login(data.addUser.token);
 
       // Go to the user's adventures page
-      navigate(`/adventures${username}`);
-      alert("Your account was created successfully!");
+      navigate(`/adventures/${username}`);
     } catch (error) {
       // If an error occurs, log it to the console
       console.log(error);

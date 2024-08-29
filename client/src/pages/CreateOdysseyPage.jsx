@@ -8,7 +8,7 @@ import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
 
 // Create and update odyssey page
-function CreateUpdateOdysseyPage({ update = false }) {
+function CreateUpdateOdysseyPage() {
   // States
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -31,7 +31,7 @@ function CreateUpdateOdysseyPage({ update = false }) {
 
       <main className="main-container">
         <form className="form-container">
-          <PageTitle title={update ? "Update Odyssey" : "New Odyssey"} />
+          <PageTitle title={"New Odyssey"} />
 
           <FormInputField
             label="Title:"
@@ -47,11 +47,7 @@ function CreateUpdateOdysseyPage({ update = false }) {
             type="textField"
           />
 
-          <Button
-            text={update ? "Update" : "Create"}
-            onClick={handleSubmit}
-            type="submit"
-          />
+          <Button text={"Create"} onClick={handleSubmit} type="submit" />
         </form>
       </main>
     </>

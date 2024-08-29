@@ -40,8 +40,7 @@ function LoginPage() {
       Auth.login(data.login.token);
 
       // Go to the user's adventures page
-      navigate(`/adventures${username}`);
-      alert("You were logged in successfully!");
+      navigate(`/adventures/${username}`);
     } catch (error) {
       // If an error occurs, log it to the console
       console.log(error);

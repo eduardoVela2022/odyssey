@@ -72,16 +72,6 @@ export const DELETE_ADVENTURE = gql`
   mutation deleteAdventure($_id: ID!) {
     deleteAdventure(_id: $_id) {
       _id
-      destination
-      country
-      startDate
-      endDate
-      odysseys {
-        _id
-        title
-        description
-        completed
-      }
     }
   }
 `;

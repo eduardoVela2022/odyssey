@@ -5,25 +5,28 @@ import PageTitle from "../components/UI/PageTitle";
 import AdventureGrid from "../components/Adventure/AdventureGrid";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER_ADVENTURES } from "../utils/queries";
+import { useEffect } from "react";
 
 // Adventures page
 function AdventuresPage() {
-  // Header navigation bar routes
-  const navBarRoutes = [
-    { name: "Home", link: "/adventures" },
-    { name: "Log out", link: "/" },
-  ];
-
   // Obtains the username that was passed in the URL as a parameter
   const { username: userParam } = useParams();
 
-  console.log(userParam);
+  // Header navigation bar routes
+  const navBarRoutes = [
+    { name: "Home", link: `/adventures/${userParam}` },
+    { name: "Log out", link: "/" },
+  ];
 
-  const { loading, data } = useQuery(QUERY_USER_ADVENTURES, {
+  // Gets the adventures of the user from the database
+  const { loading, data, refetch } = useQuery(QUERY_USER_ADVENTURES, {
     variables: { username: userParam },
   });
 
-  console.log(data);
+  // Refetches the data (Useful to display the up to date adventure list)
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <>
@@ -34,7 +37,7 @@ function AdventuresPage() {
           <div className="page-title-and-btn-container">
             <PageTitle title="Choose an adventure!" />
 
-            <Link className="primary-btn" to="/create-adventure">
+            <Link className="primary-btn" to={`/create-adventure/${userParam}`}>
               Add an adventure
             </Link>
           </div>
@@ -44,7 +47,10 @@ function AdventuresPage() {
               You currently have no adventures. Create one! 🏝️
             </p>
           ) : (
-            <AdventureGrid adventures={data.user.adventures} />
+            <AdventureGrid
+              adventures={data.user.adventures}
+              refetch={refetch}
+            />
           )}
         </div>
       </main>
