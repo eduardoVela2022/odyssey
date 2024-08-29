@@ -4,15 +4,28 @@
 import { useMutation } from "@apollo/client";
 import IconButton from "../UI/IconButton";
 import { DELETE_ADVENTURE } from "../../utils/mutation";
+import { useNavigate } from "react-router-dom";
 
 // Adventure grid item component
 function AdventureGridItem({ adventure, refetch }) {
+  // Navigation
+  const navigate = useNavigate();
+
   // Mutation to delete an adventure
   const [deleteAdventure, { error }] = useMutation(DELETE_ADVENTURE);
 
+  // Goes to the single adventure page of the selected adventure
+  function handleAdventureDetails(e) {
+    // Stops the event from activating other events
+    e.stopPropagation();
+
+    // Goes to single adventure page
+    navigate(`/adventure/${adventure._id}`);
+  }
+
   // Deletes the adventure from the user's adventure list
   async function handleDeleteAdventure(e) {
-    // Stops the event from activating the delete events of other adventure grid items
+    // Stops the event from activating other events
     e.stopPropagation();
 
     try {
@@ -33,7 +46,10 @@ function AdventureGridItem({ adventure, refetch }) {
 
   // View
   return (
-    <li className="adventures-grid-item-container">
+    <li
+      className="adventures-grid-item-container"
+      onClick={handleAdventureDetails}
+    >
       <h5 className="adventures-grid-item-title">{adventure.destination}</h5>
       <p>{adventure.country}</p>
       <p>Depart: {adventure.departureDate}</p>

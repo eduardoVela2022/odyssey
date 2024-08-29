@@ -5,6 +5,7 @@ import AdventureGridItem from "./AdventureGridItem";
 
 // Adventure grid component
 function AdventureGrid({ adventures, refetch }) {
+  // View
   return (
     <ul className="adventures-grid-container">
       {adventures.map((adventure) => (

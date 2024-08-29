@@ -8,7 +8,11 @@ function FormInputField({ label, value, onChange, type }) {
       <label className="input-field-label">{label}</label>
 
       {type === "textField" ? (
-        <textarea className="input-field textarea-field"></textarea>
+        <textarea
+          className="input-field textarea-field"
+          value={value}
+          onChange={onChange}
+        ></textarea>
       ) : (
         <input
           className="input-field"

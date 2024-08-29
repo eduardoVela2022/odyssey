@@ -52,10 +52,9 @@ const typeDefs = `
     deleteAdventure(_id: ID!): Adventure
 
     addOdyssey(
-      adventureID: ID!
+      adventureId: ID!
       title: String!
       description: String!
-      completed: Boolean!
     ): Adventure
 
     updateOdyssey(
@@ -66,7 +65,7 @@ const typeDefs = `
       completed: Boolean
     ): Adventure
 
-    deleteOdyssey(adventureID: ID!, odysseyID: ID!): Adventure
+    deleteOdyssey(adventureId: ID!, odysseyId: ID!): Adventure
 
     login(username: String!, password: String!): Auth
   }

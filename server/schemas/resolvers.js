@@ -59,48 +59,48 @@ const resolvers = {
     },
 
     // Update adventure
-    updateAdventure: async (
-      parent,
-      { _id, destination, country, departureDate, returnDate },
-      context
-    ) => {
-      // Checks if user is logged in
-      if (context.user) {
-        // Transforms date objects into strings
-        const parseDepartureDate = Date.parse(departureDate);
-        const parseReturnDate = Date.parse(returnDate);
+    // updateAdventure: async (
+    //   parent,
+    //   { _id, destination, country, departureDate, returnDate },
+    //   context
+    // ) => {
+    //   // Checks if user is logged in
+    //   if (context.user) {
+    //     // Transforms date objects into strings
+    //     const parseDepartureDate = Date.parse(departureDate);
+    //     const parseReturnDate = Date.parse(returnDate);
 
-        // Adventure is updated
-        const adventure = await Adventure.findByIdAndUpdate(
-          _id,
-          {
-            destination,
-            country,
-            departureDate: parseDepartureDate,
-            returnDate: parseReturnDate,
-          },
-          { new: true }
-        );
+    //     // Adventure is updated
+    //     const adventure = await Adventure.findByIdAndUpdate(
+    //       _id,
+    //       {
+    //         destination,
+    //         country,
+    //         departureDate: parseDepartureDate,
+    //         returnDate: parseReturnDate,
+    //       },
+    //       { new: true }
+    //     );
 
-        // If adventure doesn't exist, throw authentication error
-        if (!adventure) {
-          throw new AuthenticationError("No adventure found with this ID");
-        }
+    //     // If adventure doesn't exist, throw authentication error
+    //     if (!adventure) {
+    //       throw new AuthenticationError("No adventure found with this ID");
+    //     }
 
-        // Return the updated adventure
-        return adventure;
-      }
+    //     // Return the updated adventure
+    //     return adventure;
+    //   }
 
-      // If user isn't logged in, throw authentication error
-      throw new AuthenticationError("You need to be logged in!");
-    },
+    //   // If user isn't logged in, throw authentication error
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
 
     // Delete adventure
     deleteAdventure: async (parent, { _id }, context) => {
       // Checks if user is logged in
       if (context.user) {
         // Deletes the adventure that has the given id
-        const adventure = await Adventure.findOneAndDelete(_id);
+        const adventure = await Adventure.findByIdAndDelete(_id);
 
         // If adventure doesn't exist, throw authentication error
         if (!adventure) {
@@ -120,68 +120,79 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+    // Add odyssey
     addOdyssey: async (
       parent,
-      { adventureID, title, description, completed },
-      { user }
+      { adventureId, title, description },
+      context
     ) => {
-      if (!user) {
-        throw new AuthenticationError("You need to be logged in!");
-      }
-
-      const adventure = await Adventure.findOneAndUpdate(
-        { _id: adventureID, userId: user._id },
-        { $push: { odysseys: { title, description, completed } } },
-        { new: true }
-      );
-
-      if (!adventure) {
-        throw new AuthenticationError("No adventure found with this ID");
-      }
-
-      return adventure;
-    },
-
-    updateOdyssey: async (
-      parent,
-      { adventureID, odysseyID, title, description, completed },
-      { user }
-    ) => {
-      if (!user) {
-        throw new AuthenticationError("You need to be logged in!");
-      }
-
-      const adventure = await Adventure.findOneAndUpdate(
-        { _id: adventureID, userId: user._id, "odysseys._id": odysseyID },
-        { $set: { "odysseys.$": { title, description, completed } } },
-        { new: true }
-      );
-
-      if (!adventure) {
-        throw new AuthenticationError(
-          "No adventure or odyssey found with this ID"
+      // Checks if user is logged in
+      if (context.user) {
+        // Odyssey is created
+        const adventure = await Adventure.findByIdAndUpdate(
+          adventureId,
+          { $push: { odysseys: { title, description } } },
+          { new: true }
         );
+
+        // If adventure doesn't exist, throw authentication error
+        if (!adventure) {
+          throw new AuthenticationError("No adventure found with this ID");
+        }
+
+        // Return the updated adventure
+        return adventure;
       }
 
-      return adventure;
+      // If user isn't logged in, throw authentication error
+      throw new AuthenticationError("You need to be logged in!");
     },
 
-    deleteOdyssey: async (parent, { adventureID, odysseyID }, { user }) => {
-      if (!user) {
-        throw new AuthenticationError("You need to be logged in!");
+    // updateOdyssey: async (
+    //   parent,
+    //   { adventureID, odysseyID, title, description, completed },
+    //   { user }
+    // ) => {
+    //   if (!user) {
+    //     throw new AuthenticationError("You need to be logged in!");
+    //   }
+
+    //   const adventure = await Adventure.findOneAndUpdate(
+    //     { _id: adventureID, userId: user._id, "odysseys._id": odysseyID },
+    //     { $set: { "odysseys.$": { title, description, completed } } },
+    //     { new: true }
+    //   );
+
+    //   if (!adventure) {
+    //     throw new AuthenticationError(
+    //       "No adventure or odyssey found with this ID"
+    //     );
+    //   }
+
+    //   return adventure;
+    // },
+
+    // Delete odyssey
+    deleteOdyssey: async (parent, { adventureId, odysseyId }, context) => {
+      // Checks if user is logged in
+      if (context.user) {
+        const adventure = await Adventure.findByIdAndUpdate(
+          adventureId,
+          { $pull: { odysseys: { _id: odysseyId } } },
+          { new: true }
+        );
+
+        // If adventure doesn't exist, throw authentication error
+        if (!adventure) {
+          throw new AuthenticationError("No adventure found with this ID");
+        }
+
+        // Return the updated adventure
+        return adventure;
       }
 
-      const adventure = await Adventure.findOneAndUpdate(
-        { _id: adventureID, userId: user._id },
-        { $pull: { odysseys: { _id: odysseyID } } },
-        { new: true }
-      );
-
-      if (!adventure) {
-        throw new AuthenticationError("No adventure found with this ID");
-      }
-
-      return adventure;
+      // If user isn't logged in, throw authentication error
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     // Logs in a user

@@ -4,11 +4,15 @@
 import OdysseyListItem from "./OdysseyListItem";
 
 // Odyssey list component
-function OdysseyList({ odysseys }) {
+function OdysseyList({ odysseys, refetch }) {
   return (
     <ul className="odyssey-list-container">
       {odysseys.map((odyssey) => (
-        <OdysseyListItem key={odyssey.id} odyssey={odyssey} />
+        <OdysseyListItem
+          key={odyssey._id}
+          odyssey={odyssey}
+          refetch={refetch}
+        />
       ))}
     </ul>
   );

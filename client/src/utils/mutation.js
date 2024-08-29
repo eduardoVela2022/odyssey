@@ -34,35 +34,6 @@ export const ADD_ADVENTURE = gql`
       returnDate: $returnDate
     ) {
       _id
-      destination
-      country
-      departureDate
-      returnDate
-    }
-  }
-`;
-
-// Update adventure
-export const UPDATE_ADVENTURE = gql`
-  mutation addAdventure(
-    $_id: ID!
-    $destination: String!
-    $country: String!
-    $departureDate: String!
-    $returnDate: String!
-  ) {
-    updateAdventure(
-      _id: $_id
-      destination: $destination
-      country: $country
-      departureDate: $departureDate
-      returnDate: $returnDate
-    ) {
-      _id
-      destination
-      country
-      departureDate
-      returnDate
     }
   }
 `;
@@ -77,12 +48,27 @@ export const DELETE_ADVENTURE = gql`
 `;
 
 // // Add odyssey
-// export const ADD_ODYSSEY = gql`
-
-// `;
-
-// // Update odyssey
-// export const UPDATE_ODYSSEY = gql``;
+export const ADD_ODYSSEY = gql`
+  mutation addOdyssey(
+    $adventureId: ID!
+    $title: String!
+    $description: String!
+  ) {
+    addOdyssey(
+      adventureId: $adventureId
+      title: $title
+      description: $description
+    ) {
+      _id
+    }
+  }
+`;
 
 // // Delete odyssey
-// export const DELETE_ODYSSEY = gql``;
+export const DELETE_ODYSSEY = gql`
+  mutation deleteOdyssey($adventureId: ID!, $odysseyId: ID!) {
+    deleteOdyssey(adventureId: $adventureId, odysseyId: $odysseyId) {
+      _id
+    }
+  }
+`;

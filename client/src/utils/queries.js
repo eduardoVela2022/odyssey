@@ -25,6 +25,12 @@ export const QUERY_ADVENTURE = gql`
       country
       departureDate
       returnDate
+      odysseys {
+        _id
+        title
+        description
+        completed
+      }
     }
   }
 `;

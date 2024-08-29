@@ -6,6 +6,9 @@ import FormInputField from "../components/Form/FormInputField";
 import Button from "../components/UI/Button";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { ADD_ODYSSEY } from "../utils/mutation";
 
 // Create and update odyssey page
 function CreateUpdateOdysseyPage() {
@@ -13,15 +16,41 @@ function CreateUpdateOdysseyPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  // Obtains the id of the adventure that was passed in the URL as a parameter
+  const { id: adventureParam } = useParams();
+
+  // Navigation
+  const navigate = useNavigate();
+
   // Header navigation bar routes
-  const navBarRoutes = [{ name: "Go back", link: "/adventure" }];
+  const navBarRoutes = [
+    { name: "Go back", link: `/adventure/${adventureParam}` },
+  ];
+
+  // Mutation to add an adventure
+  const [addOdyssey, { error }] = useMutation(ADD_ODYSSEY);
 
   // Functions
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
+    // Prevents the page from reloading
     e.preventDefault();
 
-    console.log(title);
-    console.log(description);
+    try {
+      // Adds the odyssey with the given data
+      await addOdyssey({
+        variables: {
+          adventureId: adventureParam,
+          title,
+          description,
+        },
+      });
+
+      // Go to the single adventure page
+      navigate(`/adventure/${adventureParam}`);
+    } catch (error) {
+      // If an error occurs, log it to the console
+      console.log(error);
+    }
   }
 
   // View

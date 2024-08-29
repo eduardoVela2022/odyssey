@@ -30,14 +30,14 @@ const router = createBrowserRouter([
       // Adventures page
       { path: "adventures/:username", element: <AdventuresPage /> },
       // Single adventure page
-      { path: "adventure", element: <SingleAdventurePage /> },
+      { path: "adventure/:id", element: <SingleAdventurePage /> },
       // Create adventure
       {
         path: "create-adventure/:username",
         element: <CreateAventurePage />,
       },
       // Create odyssey page
-      { path: "create-odyssey", element: <CreateOdysseyPage /> },
+      { path: "create-odyssey/:id", element: <CreateOdysseyPage /> },
     ],
   },
 ]);
