@@ -2,7 +2,6 @@ const typeDefs = `
   type User {
     _id: ID
     username: String
-    email: String
     adventures: [Adventure]!
   }
 
@@ -10,8 +9,8 @@ const typeDefs = `
     _id: ID
     destination: String
     country: String
-    startDate: String
-    endDate: String
+    departureDate: String
+    returnDate: String
     odysseys: [Odyssey]!
   }
 
@@ -33,28 +32,29 @@ const typeDefs = `
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(username: String!, password: String!): Auth
 
     addAdventure(
       destination: String!
       country: String!
-      startDate: String!
-      endDate: String!
+      departureDate: String!
+      returnDate: String!
     ): Adventure
 
     updateAdventure(
       _id: ID!
       destination: String
       country: String
-      startDate: String
-      endDate: String
+      departureDate: String
+      returnDate: String
     ): Adventure
 
+    deleteAdventure(_id: ID!): Adventure
+
     addOdyssey(
-      adventureID: ID!
+      adventureId: ID!
       title: String!
       description: String!
-      completed: Boolean!
     ): Adventure
 
     updateOdyssey(
@@ -65,11 +65,9 @@ const typeDefs = `
       completed: Boolean
     ): Adventure
 
-    deleteOdyssey(adventureID: ID!, odysseyID: ID!): Adventure
+    deleteOdyssey(adventureId: ID!, odysseyId: ID!): Adventure
 
-    deleteAdventure(_id: ID!): Adventure
-
-    login(email: String!, password: String!): Auth
+    login(username: String!, password: String!): Auth
   }
 `;
 

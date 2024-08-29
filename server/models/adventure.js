@@ -12,12 +12,12 @@ const adventureSchema = new Schema(
       required: true,
       maxlength: 50,
     },
-    startDate: {
+    departureDate: {
       type: Date,
       default: Date.now,
       get: (dateAdventureVal) => dateAdventureVal.toISOString().split("T")[0],
     },
-    endDate: {
+    returnDate: {
       type: Date,
       default: Date.now,
       get: (dateAdventureVal) => dateAdventureVal.toISOString().split("T")[0],

@@ -7,10 +7,10 @@ export default defineConfig({
   server: {
     port: 5400,
     open: true,
-    // proxy: {
-    //   "/graphql": {
-    //     target: "http://localhost:3001",
-    //   },
-    // },
+    proxy: {
+      "/graphql": {
+        target: "http://localhost:3100",
+      },
+    },
   },
 });

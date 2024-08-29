@@ -6,26 +6,61 @@ import FormInputField from "../components/Form/FormInputField";
 import Button from "../components/UI/Button";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
+import { useMutation } from "@apollo/client";
+import { ADD_ADVENTURE } from "../utils/mutation";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Create and update adventure page
-function CreateUpdateAventurePage({ update = false }) {
+function CreateAventurePage() {
   // States
   const [destination, setDestination] = useState("");
   const [country, setCountry] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
 
+  // Obtains the username that was passed in the URL as a parameter
+  const { username: userParam } = useParams();
+
+  // Navigation
+  const navigate = useNavigate();
+
   // Header navigation bar routes
-  const navBarRoutes = [{ name: "Go back", link: "/adventures" }];
+  const navBarRoutes = [{ name: "Go back", link: `/adventures/${userParam}` }];
+
+  // Mutation to add an adventure
+  const [addAdventure, { error }] = useMutation(ADD_ADVENTURE);
+
+  // Checks if fields are filled
+  function fieldsAreFilled() {
+    if (!destination || !country || !departureDate || !returnDate) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   // Functions
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
+    // Prevents the page from reloading
     e.preventDefault();
 
-    console.log(destination);
-    console.log(country);
-    console.log(departureDate);
-    console.log(returnDate);
+    try {
+      // Adds the adventure with the given data
+      await addAdventure({
+        variables: {
+          destination,
+          country,
+          departureDate,
+          returnDate,
+        },
+      });
+
+      // Go to the user's adventures page
+      navigate(`/adventures/${userParam}`);
+    } catch (error) {
+      // If an error occurs, log it to the console
+      console.log(error);
+    }
   }
 
   // View
@@ -35,7 +70,7 @@ function CreateUpdateAventurePage({ update = false }) {
 
       <main className="main-container">
         <form className="form-container">
-          <PageTitle title={update ? "Update Adventure" : "New Adventure"} />
+          <PageTitle title={"New Adventure"} />
 
           <FormInputField
             label="Destination:"
@@ -66,9 +101,10 @@ function CreateUpdateAventurePage({ update = false }) {
           />
 
           <Button
-            text={update ? "Update" : "Create"}
+            text={"Create"}
             onClick={handleSubmit}
             type="submit"
+            disabled={fieldsAreFilled()}
           />
         </form>
       </main>
@@ -77,4 +113,4 @@ function CreateUpdateAventurePage({ update = false }) {
 }
 
 // Export
-export default CreateUpdateAventurePage;
+export default CreateAventurePage;

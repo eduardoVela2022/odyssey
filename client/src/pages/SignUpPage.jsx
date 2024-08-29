@@ -5,6 +5,10 @@ import Button from "../components/UI/Button";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutation";
+import Auth from "../utils/auth";
+import { QUERY_USER_ADVENTURES } from "../utils/queries";
 
 // Sign up page
 function SignUpPage() {
@@ -12,7 +16,12 @@ function SignUpPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  // Navigation
   const navigate = useNavigate();
+
+  // Mutation to add a user to the database
+  const [addUser, { error, data }] = useMutation(ADD_USER);
 
   // Header navigation bar routes
   const navBarRoutes = [
@@ -20,15 +29,40 @@ function SignUpPage() {
     { name: "Sign up", link: "/sign-up" },
   ];
 
-  // Functions
-  function handleSubmit(e) {
+  // Handles the form's submit event
+  async function handleSubmit(e) {
+    // Prevents the page from reloading
     e.preventDefault();
 
-    console.log(username);
-    console.log(password);
-    console.log(confirmPassword);
+    try {
+      // Adds the new user with the provided username and password
+      const { data } = await addUser({
+        variables: { username, password },
+      });
 
-    navigate("/adventures");
+      // Get the user's login token and user it
+      Auth.login(data.addUser.token);
+
+      // Go to the user's adventures page
+      navigate(`/adventures/${username}`);
+    } catch (error) {
+      // If an error occurs, log it to the console
+      console.log(error);
+    }
+  }
+
+  // Checks if fields are filled
+  function validateFields() {
+    if (
+      !username ||
+      !password ||
+      !confirmPassword ||
+      password !== confirmPassword
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // View
@@ -61,7 +95,12 @@ function SignUpPage() {
             type="password"
           />
 
-          <Button text="Sign in" onClick={handleSubmit} type="submit" />
+          <Button
+            text="Sign in"
+            onClick={handleSubmit}
+            type="submit"
+            disabled={validateFields()}
+          />
         </form>
       </main>
     </div>

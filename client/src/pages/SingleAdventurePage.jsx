@@ -1,56 +1,34 @@
 // Imports
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
-import CompletionBar from "../components/SingleAdventure/CompletionBar";
 import OdysseyList from "../components/SingleAdventure/OdysseyList";
+import { useQuery } from "@apollo/client";
+import { QUERY_ADVENTURE } from "../utils/queries";
+import { useEffect } from "react";
 
 // Adventures page
 function SingleAdventurePage() {
+  // Obtains the id of the adventure that was passed in the URL as a parameter
+  const { id: adventureParam, username: userParam } = useParams();
+
   // Header navigation bar routes
   const navBarRoutes = [
-    { name: "Home", link: "/adventures" },
+    { name: "Home", link: `/adventures/${userParam}` },
     { name: "Log out", link: "/" },
   ];
 
-  // Test odyssey list
-  const testOdysseys = [
-    {
-      id: 1,
-      title: "Title 1",
-      description: "Something",
-    },
-    {
-      id: 2,
-      title: "Title 2",
-      description: "Something",
-    },
-    {
-      id: 3,
-      title: "Title 3",
-      description: "Something",
-    },
-    {
-      id: 4,
-      title: "Title 4",
-      description: "Something",
-    },
-    {
-      id: 5,
-      title: "Title 2",
-      description: "Something",
-    },
-    {
-      id: 6,
-      title: "Title 3",
-      description: "Something",
-    },
-    {
-      id: 7,
-      title: "Title 4",
-      description: "Something",
-    },
-  ];
+  // Gets the adventure that has the given id from the database
+  const { data, refetch } = useQuery(QUERY_ADVENTURE, {
+    variables: { _id: adventureParam },
+  });
+
+  console.log(data);
+
+  // Refetches the data (Useful to display the up to date odyssey list)
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <>
@@ -58,17 +36,33 @@ function SingleAdventurePage() {
 
       <main className="main-container">
         <div className="single-adventure-container">
-          <div className="page-title-and-btn-container">
-            <PageTitle title="Choose an odyssey!" />
+          {data !== undefined ? (
+            <>
+              <div className="page-title-and-btn-container">
+                <PageTitle title={data.adventure.destination} />
 
-            <Link className="primary-btn" to="/create-odyssey">
-              Add an odyssey
-            </Link>
-          </div>
+                <Link
+                  className="primary-btn"
+                  to={`/create-odyssey/${adventureParam}`}
+                >
+                  Add an odyssey
+                </Link>
+              </div>
 
-          <CompletionBar completed={4} incompleted={6} total={10} />
-
-          <OdysseyList odysseys={testOdysseys} />
+              {data.adventure.odysseys.length > 0 ? (
+                <OdysseyList
+                  odysseys={data.adventure.odysseys}
+                  refetch={refetch}
+                />
+              ) : (
+                <p className="empty-list-message">
+                  You currently have no odysseys. Create one! 🏝️
+                </p>
+              )}
+            </>
+          ) : (
+            <p className="page-title">Loading...</p>
+          )}
         </div>
       </main>
     </>
