@@ -1,0 +1,57 @@
+[
+    {
+        "destination": "Montreal",
+        "country": "Canada",
+        "startDate": "2024-09-09",
+        "endDate": "2024-09-15",
+        "odysseys": [
+            {
+                "title": "Trek #1",  
+                "description": "biking",
+                "completed": false
+            },
+            {
+                "title": "Trek #2",  
+                "description": "mountain hike",
+                "completed": false
+            }
+        ]
+    },
+    {
+        "destination": "Detroit",
+        "country": "United States",
+        "startDate": "2024-05-09",
+        "endDate": "2024-05-15",
+        "odysseys": [
+            {
+                "title": "Trek #1",  
+                "description": "breakfast",
+                "completed": false
+            },
+            {
+                "title": "Trek #2",  
+                "description": "shopping",
+                "completed": false
+            }
+        ]
+    },
+    {
+        "destination": "Mexico City",
+        "country": "Mexico",
+        "startDate": "2024-08-09",
+        "endDate": "2024-08-15",
+        "odysseys": [
+            {
+                "title": "Trek #1",  
+                "description": "eraly workout",
+                "completed": false
+            },
+            {
+                "title": "Trek #2",  
+                "description": "Taco tour",
+                "completed": false
+            }
+        ]
+    }
+   
+]
