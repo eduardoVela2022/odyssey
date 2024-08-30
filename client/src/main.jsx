@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element: <CreateAventurePage />,
       },
       // Create odyssey page
-      { path: "create-odyssey/:id", element: <CreateOdysseyPage /> },
+      { path: "create-odyssey/:id/:username", element: <CreateOdysseyPage /> },
     ],
   },
 ]);

@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 // Imports
 import { useState } from "react";
 import FormInputField from "../components/Form/FormInputField";
@@ -28,7 +26,7 @@ function CreateAventurePage() {
   const navBarRoutes = [{ name: "Go back", link: `/adventures/${userParam}` }];
 
   // Mutation to add an adventure
-  const [addAdventure, { error }] = useMutation(ADD_ADVENTURE);
+  const [addAdventure] = useMutation(ADD_ADVENTURE);
 
   // Checks if fields are filled
   function fieldsAreFilled() {

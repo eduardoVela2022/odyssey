@@ -1,11 +1,12 @@
 // Imports
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
 import AdventureGrid from "../components/Adventure/AdventureGrid";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER_ADVENTURES } from "../utils/queries";
 import { useEffect } from "react";
+import Auth from "../utils/auth";
 
 // Adventures page
 function AdventuresPage() {
@@ -18,6 +19,9 @@ function AdventuresPage() {
     { name: "Log out", link: "/" },
   ];
 
+  // Navigation
+  const navigate = useNavigate();
+
   // Gets the adventures of the user from the database
   const { data, refetch } = useQuery(QUERY_USER_ADVENTURES, {
     variables: { username: userParam },
@@ -27,6 +31,13 @@ function AdventuresPage() {
   useEffect(() => {
     refetch();
   }, [refetch]);
+
+  // If user isn't logged in, go to the login page
+  useEffect(() => {
+    if (!Auth.loggedIn()) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <>

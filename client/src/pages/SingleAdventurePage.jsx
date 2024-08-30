@@ -1,11 +1,12 @@
 // Imports
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../components/UI/Header";
 import PageTitle from "../components/UI/PageTitle";
 import OdysseyList from "../components/SingleAdventure/OdysseyList";
 import { useQuery } from "@apollo/client";
 import { QUERY_ADVENTURE } from "../utils/queries";
 import { useEffect } from "react";
+import Auth from "../utils/auth";
 
 // Adventures page
 function SingleAdventurePage() {
@@ -18,17 +19,25 @@ function SingleAdventurePage() {
     { name: "Log out", link: "/" },
   ];
 
+  // Navigation
+  const navigate = useNavigate();
+
   // Gets the adventure that has the given id from the database
   const { data, refetch } = useQuery(QUERY_ADVENTURE, {
     variables: { _id: adventureParam },
   });
 
-  console.log(data);
-
   // Refetches the data (Useful to display the up to date odyssey list)
   useEffect(() => {
     refetch();
   }, [refetch]);
+
+  // If user isn't logged in, go to the login page
+  useEffect(() => {
+    if (!Auth.loggedIn()) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <>
@@ -43,7 +52,7 @@ function SingleAdventurePage() {
 
                 <Link
                   className="primary-btn"
-                  to={`/create-odyssey/${adventureParam}`}
+                  to={`/create-odyssey/${adventureParam}/${userParam}`}
                 >
                   Add an odyssey
                 </Link>

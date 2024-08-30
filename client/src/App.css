@@ -216,6 +216,7 @@
 /* Navbar Elements */
 .navbar-container {
   display: flex;
+  align-items: center;
   gap: 2.5rem;
 }
 
