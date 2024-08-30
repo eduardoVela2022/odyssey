@@ -33,15 +33,15 @@ class AuthService {
   }
 
   // Creates login token and redirects the user to its adventures page
-  login(idToken) {
+  login(idToken, username) {
     localStorage.setItem("id_token", idToken);
-    window.location.assign("/adventures");
+    window.location.assign(`/adventures/${username}`);
   }
 
   // Deletes the login token and reloads the website
   logout() {
     localStorage.removeItem("id_token");
-    window.location.reload();
+    window.location.assign("/");
   }
 }
 

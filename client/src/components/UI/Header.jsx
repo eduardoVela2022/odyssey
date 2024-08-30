@@ -2,6 +2,7 @@
 
 // Imports
 import { Link } from "react-router-dom";
+import Auth from "../../utils/auth";
 
 // Header component
 function Header({ navBarRoutes }) {
@@ -11,11 +12,21 @@ function Header({ navBarRoutes }) {
       <h1 className="header-title">Odyssey</h1>
 
       <nav className="navbar-container">
-        {navBarRoutes.map((route) => (
-          <Link className="navbar-item" key={route.link} to={route.link}>
-            {route.name}
-          </Link>
-        ))}
+        {navBarRoutes.map((route) =>
+          route.name !== "Log out" ? (
+            <Link className="navbar-item" key={route.link} to={route.link}>
+              {route.name}
+            </Link>
+          ) : (
+            <button
+              className="navbar-item"
+              key={route.link}
+              onClick={Auth.logout}
+            >
+              {route.name}
+            </button>
+          )
+        )}
       </nav>
     </header>
   );

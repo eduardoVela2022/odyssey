@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 // Imports
 import { useState } from "react";
 import FormInputField from "../components/Form/FormInputField";
@@ -17,18 +15,18 @@ function CreateOdysseyPage() {
   const [description, setDescription] = useState("");
 
   // Obtains the id of the adventure that was passed in the URL as a parameter
-  const { id: adventureParam } = useParams();
+  const { id: adventureParam, username: userParam } = useParams();
 
   // Navigation
   const navigate = useNavigate();
 
   // Header navigation bar routes
   const navBarRoutes = [
-    { name: "Go back", link: `/adventure/${adventureParam}` },
+    { name: "Go back", link: `/adventure/${adventureParam}/${userParam}` },
   ];
 
   // Mutation to add an adventure
-  const [addOdyssey, { error }] = useMutation(ADD_ODYSSEY);
+  const [addOdyssey] = useMutation(ADD_ODYSSEY);
 
   // Checks if fields are filled
   function fieldsAreFilled() {
@@ -55,7 +53,7 @@ function CreateOdysseyPage() {
       });
 
       // Go to the single adventure page
-      navigate(`/adventure/${adventureParam}`);
+      navigate(`/adventure/${adventureParam}/${userParam}`);
     } catch (error) {
       // If an error occurs, log it to the console
       console.log(error);
