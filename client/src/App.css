@@ -46,6 +46,7 @@
 .page-title {
   font-size: 4rem;
   font-weight: 500;
+  text-align: center;
 }
 
 .page-title-and-btn-container {
@@ -58,6 +59,7 @@
 .button-set-container {
   display: flex;
   gap: 1rem;
+  justify-content: end;
 }
 
 .icon-btn:hover {
@@ -96,6 +98,8 @@
   border-radius: 15px;
   transition: border-color 0.5s ease;
   cursor: pointer;
+  text-align: center;
+  word-break: break-all;
 }
 
 .adventures-grid-item-container:hover {
@@ -116,13 +120,6 @@
   margin: 1rem;
 }
 
-.completion-bar-container {
-  display: flex;
-  gap: 1rem;
-  padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-}
-
 .odyssey-list-container {
   display: flex;
   flex-direction: column;
@@ -140,6 +137,7 @@
   border-radius: 15px;
   width: inherit;
   transition: border-color 0.5s ease;
+  word-break: break-all;
 }
 
 .odyssey-list-item-container:hover {
@@ -148,11 +146,6 @@
 
 .odyssey-list-item-title {
   font-size: 1.125rem;
-}
-
-.odyssey-list-item-title-container {
-  display: flex;
-  justify-content: space-between;
 }
 
 /* Form Elements */
@@ -241,4 +234,86 @@
 
 .footer-title {
   font-weight: 400;
+}
+
+/* Header changes into a column */
+@media screen and (max-width: 700px) {
+  .header-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .navbar-item {
+    font-size: 1.25rem;
+  }
+}
+
+/* Header and footer titles' font size is reduced */
+@media screen and (max-width: 500px) {
+  .header-title {
+    font-size: 2.875rem;
+  }
+
+  .footer-title {
+    font-size: 0.625rem;
+  }
+}
+
+/* Single adventure and form containers are expanded so they look more spacious */
+@media screen and (max-width: 1500px) {
+  .single-adventure-container {
+    width: 70dvw;
+  }
+
+  .form-container {
+    width: 70dvw;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .single-adventure-container {
+    width: 80dvw;
+  }
+
+  .form-container {
+    width: 80dvw;
+  }
+}
+
+/* Font size is reduced */
+@media screen and (max-width: 500px) {
+  .page-title {
+    font-size: 3rem;
+  }
+
+  .input-field-container {
+    font-size: 1rem;
+  }
+
+  .primary-btn {
+    font-size: 1rem;
+  }
+
+  .disabled-btn {
+    font-size: 1rem;
+  }
+}
+
+/* Adventure grid's columns are gradually reduced to only one column*/
+@media screen and (max-width: 1000px) {
+  .adventures-grid-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .adventures-grid-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .adventures-grid-container {
+    grid-template-columns: 1fr;
+  }
 }
