@@ -12,7 +12,7 @@ function OdysseyListItem({ odyssey, refetch }) {
   const { id: adventureParam } = useParams();
 
   // Mutation to delete an odyssey
-  const [deleteOdyssey, { error }] = useMutation(DELETE_ODYSSEY);
+  const [deleteOdyssey] = useMutation(DELETE_ODYSSEY);
 
   // Deletes the odyssey from the adventure's odyssey list
   async function handleDeleteOdyssey(e) {
@@ -39,18 +39,17 @@ function OdysseyListItem({ odyssey, refetch }) {
   // View
   return (
     <li className="odyssey-list-item-container">
-      <div className="odyssey-list-item-title-container">
-        <h5 className="odyssey-list-item-title">{odyssey.title}</h5>
+      <h5 className="odyssey-list-item-title">{odyssey.title}</h5>
 
-        <div className="button-set-container">
-          <IconButton
-            icon={"/delete-icon.svg"}
-            alt={"Delete button icon"}
-            onClick={handleDeleteOdyssey}
-          />
-        </div>
-      </div>
       <p>{odyssey.description}</p>
+
+      <div className="button-set-container">
+        <IconButton
+          icon={"/delete-icon.svg"}
+          alt={"Delete button icon"}
+          onClick={handleDeleteOdyssey}
+        />
+      </div>
     </li>
   );
 }
