@@ -38,12 +38,14 @@ GIVEN a personal travel organizer application:
 
 ## Go to our project
 
-To visit and review our project, [click here](https://github.com/eduardoVela2022/odyssey)
+To visit and review our project, [click here](https://odyssey-7hav.onrender.com/)
 
 ## Visual reference of project
 
-The following image demonstrates the app's appearance:
+The following image demonstrates the app's appearance: (./images/demo.gif)
 
 ## License
+
+This project uses the MIT license.
 
 ![GitHub](https://img.shields.io/github/license/eduardoVela2022/V-logoGenerator?style=for-the-badge)<br> Go to license [here](https://github.com/eduardoVela2022/V-logoGenerator/blob/main/LICENSE)
