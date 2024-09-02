@@ -49,5 +49,3 @@ The following image demonstrates the app's appearance:
 ## License
 
 This project uses the MIT license.
-
-![GitHub](https://img.shields.io/github/license/eduardoVela2022/V-logoGenerator?style=for-the-badge)<br> Go to license [here](https://github.com/eduardoVela2022/V-logoGenerator/blob/main/LICENSE)
