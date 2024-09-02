@@ -42,7 +42,9 @@ To visit and review our project, [click here](https://odyssey-7hav.onrender.com/
 
 ## Visual reference of project
 
-The following image demonstrates the app's appearance: (./images/demo.gif)
+The following image demonstrates the app's appearance:
+
+![](images/demo.gif)
 
 ## License
 

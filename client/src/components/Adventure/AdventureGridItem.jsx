@@ -12,7 +12,7 @@ function AdventureGridItem({ adventure, refetch, username }) {
   const navigate = useNavigate();
 
   // Mutation to delete an adventure
-  const [deleteAdventure, { error }] = useMutation(DELETE_ADVENTURE);
+  const [deleteAdventure] = useMutation(DELETE_ADVENTURE);
 
   // Goes to the single adventure page of the selected adventure
   function handleAdventureDetails(e) {
